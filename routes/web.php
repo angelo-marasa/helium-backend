@@ -15,6 +15,8 @@ use App\Http\Controllers\UserAuthController;
 |
 */
 
+Route::get('/', [Controller::class, 'home']);
+
 Route::get('/get-hotspots', [Controller::class, 'hotspots']);
 Route::get('/get-user', [Controller::class, 'users']);
 

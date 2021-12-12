@@ -14,6 +14,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function home() {
+        return view('welcome');
+    }
     public function hotspots() {
         $hotspots = User::find(2)->hotspots;
 
