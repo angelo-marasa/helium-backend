@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Controller;
+use App\Models\Hotspots;
+use App\Http\Controllers\UserAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/get-hotspots', [Controller::class, 'hotspots']);
+Route::get('/get-user', [Controller::class, 'users']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+
+/* API Endpoints */
+//-- Auth
+Route::post('/v1/helium/user-login', [UserAuthController::class, 'login']);
+Route::post('/v1/helium/user-register', [UserAuthController::class, 'registerNewUser']);
+
+
+
+
+
+
+
+//-- Data API
+Route::post('/v1/helium/add-hotpsot', [Hotspots::class, 'addHotspot']);
