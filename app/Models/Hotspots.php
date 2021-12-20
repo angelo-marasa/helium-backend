@@ -11,6 +11,11 @@ class Hotspots extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'address',
+        'name'
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

@@ -100,11 +100,18 @@ class UserAuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $response = [
+            'success' => true,
             'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
         ];
 
         return response($response, 201);
+    }
+
+    public function authUser(Request $request) {
+        return response([
+            'success' => true
+        ], 201);
     }
 }

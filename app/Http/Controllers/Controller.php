@@ -18,7 +18,7 @@ class Controller extends BaseController
         return view('welcome');
     }
     public function hotspots() {
-        $hotspots = User::find(2)->hotspots;
+        $hotspots = User::find(12)->hotspots;
 
         dd($hotspots);
     }
