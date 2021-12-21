@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hotspots;
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+
 
 class HotspotsController extends Controller
 {
@@ -35,6 +37,7 @@ class HotspotsController extends Controller
         //-- Save the hotspot with the user relationship
         $payload = $user->hotspots()->save($hotspot);
 
+        // Build and return the response
         $response = [
             'success' => true,
             'payload' => $payload
@@ -42,5 +45,18 @@ class HotspotsController extends Controller
 
         return response($response, 201);
 
+    }
+
+    public function getHotSpots(Request $request) {
+
+        $hotspots = User::find($request->user()->id)->hotspots;
+        $count = count($hotspots);
+
+        $response = [
+            'hotspots' => $count,
+            'results' => $hotspots,
+            'owner' => $request->user()
+        ];
+        return response($response,201);
     }
 }

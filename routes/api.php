@@ -43,4 +43,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [UserAuthController::class, 'logout']);
     Route::get('/auth-user', [UserAuthController::class, 'authUser']);
     Route::post('/hotspot/add', [HotspotsController::class, 'addHotspot']);
+    Route::get('/hotspots', [HotspotsController::class, 'getHotspots']);
 });

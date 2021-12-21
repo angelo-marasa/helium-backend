@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use App\Models\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Validator;
 
 class UserAuthController extends Controller
 {
@@ -48,16 +49,25 @@ class UserAuthController extends Controller
 
     public function register(Request $request) {
 
-        $fields = $request->validate([
+
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed'
         ]);
+         
+        if ($validator->fails()) {
+             return response([
+                    'err' => true,
+                    'message' => $validator->messages()->first()
+             ]);
+        }
 
         $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password'])
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password'])
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
