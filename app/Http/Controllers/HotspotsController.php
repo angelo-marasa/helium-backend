@@ -59,4 +59,5 @@ class HotspotsController extends Controller
         ];
         return response($response,201);
     }
+
 }
