@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Log;
 class HotspotsController extends Controller
 {
     public function addHotspot(Request $request) {
-        
 
         //-- API request to get hotspot details by address.
         $response = Http::withHeaders([
@@ -28,7 +27,7 @@ class HotspotsController extends Controller
 
         $hotspot = new Hotspots([
             'address' => $request->address,
-            'name' => $name
+            'name' => $name,
         ]);
 
         //-- Get the current authenticated user
@@ -58,6 +57,17 @@ class HotspotsController extends Controller
             'owner' => $request->user()
         ];
         return response($response,201);
+    }
+
+    public function deleteHotspot(Request $request) {
+    $hotspot = Hotspots::find($request->id);
+
+    $deleted = $hotspot->delete();
+
+        $response = [
+            'deleted' => $deleted
+        ];
+        return response($response, 201);
     }
 
 }
