@@ -20,7 +20,7 @@ class HotspotsController extends Controller
 
         //-- We want JSON type data
         $hotspot_data = $response->json();
-
+        
         //-- Convert slug name to nice name
         $name = ucwords(str_replace("-", " ", $hotspot_data['data']['name']));
 

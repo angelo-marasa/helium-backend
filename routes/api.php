@@ -32,14 +32,6 @@ Route::post('/login', [UserAuthController::class, 'login']);
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-
-    Route::get('/products', function (Request $request) {
-        return "products";
-    });
-
     Route::post('/logout', [UserAuthController::class, 'logout']);
     Route::get('/auth-user', [UserAuthController::class, 'authUser']);
     Route::post('/hotspot/add', [HotspotsController::class, 'addHotspot']);
