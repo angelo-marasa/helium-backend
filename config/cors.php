@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
 
-    'allowed_origins' => ['http://localhost:3000', 'https://helium-dash.herokuapp.com'],
+    'allowed_origins' => ['http://localhost:3000', 'https://helium-dash.herokuapp.com', 'https://helium-next.vercel.app'],
 
     'allowed_origins_patterns' => ['*'],
 
